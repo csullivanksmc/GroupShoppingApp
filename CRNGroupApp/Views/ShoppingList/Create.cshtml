@@ -1,16 +1,15 @@
-﻿@model CRNGroupApp.Models.ShoppingList
+﻿@model CRNGroupApp.Data.ShoppingList
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+<h2>Create</h2>
+
     <div class="form-horizontal">
         <h4>ShoppingList</h4>
         <hr />

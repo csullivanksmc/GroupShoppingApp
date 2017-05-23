@@ -1,13 +1,11 @@
-﻿@model IEnumerable<CRNGroupApp.Models.ShoppingListItem>
+﻿@model IEnumerable<CRNGroupApp.Data.ShoppingListItem>
 
-@{
-    ViewBag.Title = "ViewItem";
-}
 
-<h2>ViewItem</h2>
+
+<h2>@ViewBag.Title Shopping List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CreateItem")
+    @Html.ActionLink("Create New", "CreateItem", new { id = ViewBag.ShoppingListId })
 </p>
 <table class="table">
     <tr>
@@ -35,7 +33,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.ShoppingList.Name)
@@ -59,9 +58,9 @@
             @Html.DisplayFor(modelItem => item.ModifiedUtc)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ShoppingListItemId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ShoppingListItemId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ShoppingListItemId })
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ShoppingListItemId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ShoppingListItemId }) |*@
+            @Html.ActionLink("Delete", "Delete" "ShoppingListItem", new { id=item.ShoppingListItemId })
         </td>
     </tr>
 }

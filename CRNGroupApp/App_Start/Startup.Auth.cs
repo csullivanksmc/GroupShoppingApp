@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using CRNGroupApp.Models;
-
+using CRNGroupApp.Data;
 
 namespace CRNGroupApp
 {

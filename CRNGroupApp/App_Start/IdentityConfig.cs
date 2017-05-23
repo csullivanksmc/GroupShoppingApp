@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using CRNGroupApp.Models;
-
+using CRNGroupApp.Data;
 
 namespace CRNGroupApp
 {
@@ -87,6 +87,7 @@ namespace CRNGroupApp
             }
             return manager;
         }
+
     }
 
     // Configure the application sign-in manager which is used in this application.

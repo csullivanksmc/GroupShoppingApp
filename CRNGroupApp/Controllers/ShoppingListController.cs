@@ -1,13 +1,11 @@
-﻿using CRNGroupApp.Models;
-using CRNGroupApp.Controllers;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Web.Mvc;
+using CRNGroupApp.Data;
 
 
-namespace CRNGroupApp.Models
+namespace CRNGroupApp.Controllers
 {
     public class ShoppingListController : Controller
     {
@@ -29,7 +27,7 @@ namespace CRNGroupApp.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Models.ShoppingList shoppingListModel = db.ShoppingLists.Find(id);
+            Data.ShoppingList shoppingListModel = db.ShoppingLists.Find(id);
             if (shoppingListModel == null)
             {
                 return HttpNotFound();
@@ -68,7 +66,7 @@ namespace CRNGroupApp.Models
         //POST: UpdateCheckBox
         [HttpPost]
         //[ValidateAntiForgeryToken]  //referencing id in order to update IsChecked,creating a new instance of class and calling it "shoppingListItem"
-        public ActionResult UpdateCheckbox([Bind(Include = "ShoppingListItemId, IsChecked")] CRNGroupApp.Models.ShoppingListItem shoppingListItem)
+        public ActionResult UpdateCheckbox([Bind(Include = "ShoppingListItemId, IsChecked")] ShoppingListItem shoppingListItem)
         {   //pulling data from db and holding it in memory
             var item = db.ShoppingListItems.Find(shoppingListItem.ShoppingListItemId);
             //referencing IsChecked on item and converting it to IsChecked on shoppingListItem
@@ -84,7 +82,7 @@ namespace CRNGroupApp.Models
         public ActionResult CreateItem(int? id)
         {
             ViewBag.ShoppingListId = id;
-            //ViewBag.ListTitle = db.ShoppingLists.Find(id).Name;
+            ViewBag.ListTitle = db.ShoppingLists.Find(id).Name;
             return View();
         }
 
@@ -95,7 +93,7 @@ namespace CRNGroupApp.Models
         [ValidateAntiForgeryToken]
         public ActionResult CreateItem([Bind(Include = "ShoppingListItemId,ShoppingListId," +
                                                        "Content,Priority,Note,IsChecked,CreatedUtc,ModifiedUtc")]
-                                                        CRNGroupApp.Models.ShoppingListItem shoppingListItem, int id)
+                                                        ShoppingListItem shoppingListItem, int id)
         {   //added parameter int id to "create".
             if (ModelState.IsValid)
             {   //add shoppinglistitems to a particular list prior to "add"
@@ -120,7 +118,7 @@ namespace CRNGroupApp.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShoppingListId,UserId,Name,Color,CreatedUtc,ModifiedUtc")] CRNGroupApp.Models.ShoppingList shoppingListModel)
+        public ActionResult Create([Bind(Include = "ShoppingListId,UserId,Name,Color,CreatedUtc,ModifiedUtc")] Data.ShoppingList shoppingListModel)
         {
             if (ModelState.IsValid)
             {
@@ -141,7 +139,7 @@ namespace CRNGroupApp.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CRNGroupApp.Models.ShoppingList shoppingListModel = db.ShoppingLists.Find(id);
+            Data.ShoppingList shoppingListModel = db.ShoppingLists.Find(id);
             if (shoppingListModel == null)
             {
                 return HttpNotFound();
@@ -154,7 +152,7 @@ namespace CRNGroupApp.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShoppingListId,UserId,Name,Color,CreatedUtc,ModifiedUtc")] CRNGroupApp.Models.ShoppingList shoppingListModel)
+        public ActionResult Edit([Bind(Include = "ShoppingListId,UserId,Name,Color,CreatedUtc,ModifiedUtc")] Data.ShoppingList shoppingListModel)
         {
             if (ModelState.IsValid)
             {
@@ -172,7 +170,7 @@ namespace CRNGroupApp.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CRNGroupApp.Models.ShoppingList shoppingListModel = db.ShoppingLists.Find(id);
+            Data.ShoppingList shoppingListModel = db.ShoppingLists.Find(id);
             if (shoppingListModel == null)
             {
                 return HttpNotFound();
@@ -185,7 +183,7 @@ namespace CRNGroupApp.Models
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Models.ShoppingList shoppingListModel = db.ShoppingLists.Find(id);
+            Data.ShoppingList shoppingListModel = db.ShoppingLists.Find(id);
             db.ShoppingLists.Remove(shoppingListModel);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -1,4 +1,4 @@
-﻿@model CRNGroupApp.Models.ShoppingListItem
+﻿@model CRNGroupApp.Data.ShoppingListItem
 
 @{
     ViewBag.Title = "Edit";
@@ -18,9 +18,11 @@
         @Html.HiddenFor(model => model.ShoppingListItemId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ShoppingListId, "ShoppingListId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ShoppingListId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ShoppingListId", null, htmlAttributes: new { @class = "form-control" })
+                @*@Html.DropDownList("ShoppingListId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.EditorFor(model => model.ShoppingListId, new { htmlAttributes = new { @class = "form-control" } })
+
                 @Html.ValidationMessageFor(model => model.ShoppingListId, "", new { @class = "text-danger" })
             </div>
         </div>

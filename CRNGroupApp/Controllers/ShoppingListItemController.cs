@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using CRNGroupApp.Models;
-
+using CRNGroupApp.Data;
 
 namespace CRNGroupApp.Controllers
 {
@@ -109,7 +109,7 @@ namespace CRNGroupApp.Controllers
             ShoppingListItem shoppingListItem = db.ShoppingListItems.Find(id);
             db.ShoppingListItems.Remove(shoppingListItem);
             db.SaveChanges();
-            return RedirectToAction("ViewItem", "ShoppingList", new { id = shoppingListItem.ShoppingListId });
+            return RedirectToAction("ViewItem", "ShoppingList", new {id = shoppingListItem.ShoppingListId});
         }
 
         protected override void Dispose(bool disposing)

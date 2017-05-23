@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CRNGroupApp.Models
+namespace CRNGroupApp.Data
+
 {
     public enum Priority
     {

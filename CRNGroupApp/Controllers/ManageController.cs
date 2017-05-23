@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using CRNGroupApp.Models;
 
 namespace CRNGroupApp.Controllers
+
 {
     [Authorize]
     public class ManageController : Controller

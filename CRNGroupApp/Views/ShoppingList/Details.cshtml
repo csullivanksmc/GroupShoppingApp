@@ -1,4 +1,4 @@
-﻿@model CRNGroupApp.Models.ShoppingListItem
+﻿@model CRNGroupApp.Data.ShoppingListItem
 
 @{
     ViewBag.Title = "Details";
@@ -69,6 +69,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ShoppingListItemId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShoppingListId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

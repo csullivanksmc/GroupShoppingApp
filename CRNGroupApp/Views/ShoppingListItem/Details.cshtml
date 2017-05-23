@@ -1,4 +1,4 @@
-﻿@model CRNGroupApp.Models.ShoppingListItem
+﻿@model CRNGroupApp.Data.ShoppingListItem
 
 @{
     ViewBag.Title = "Details";
@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ShoppingList.Name)
+            @Html.DisplayNameFor(model => model.ShoppingListItemId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ShoppingList.Name)
+            @Html.DisplayFor(model => model.ShoppingListItemId)
         </dd>
 
         <dt>

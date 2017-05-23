@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CRNGroupApp.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CRNGroupApp.Models
 {
-    class ShoppingLIst
+   public class ShoppingList
     {
         [Key]
         public int ShoppingListId { get; set; }
