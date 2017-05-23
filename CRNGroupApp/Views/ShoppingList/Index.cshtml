@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CRNGroupApp.Data.Note>
+﻿@model IEnumerable<CRNGroupApp.Models.ShoppingList>
 
 @{
     ViewBag.Title = "Index";
@@ -12,10 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ItemId)
+            @Html.DisplayNameFor(model => model.UserId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Body)
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreatedUtc)
@@ -29,10 +32,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ItemId)
+            @Html.DisplayFor(modelItem => item.UserId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Body)
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreatedUtc)
@@ -41,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.ModifiedUtc)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.NoteId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.NoteId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.NoteId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ShoppingListId }) |
+            @Html.ActionLink("Items on the List", "ViewItem", new { id = item.ShoppingListId })  |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ShoppingListId }) |
         </td>
     </tr>
 }

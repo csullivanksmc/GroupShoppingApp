@@ -5,20 +5,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CRNGroupApp.Data
+namespace CRNGroupApp.Models
 {
     public class ShoppingList
     {
         [Key]
         public int ShoppingListId { get; set; }
+
+        public int? UserId { get; set; }
+
         [Required]
-        public int UserId { get; set; }
-        [Required]
+        [MinLength(2)]
+        [MaxLength(25)]
         public string Name { get; set; }
-        [Required]
+
+        [RegularExpression(@"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", ErrorMessage = "Please enter a Hex Value.")]
         public string Color { get; set; }
-        [Required]
+
+        [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }
+
         public DateTimeOffset? ModifiedUtc { get; set; }
+
+        public override string ToString()
+        {
+            return $"[{ShoppingListId}] {Name}";
+        }
+
+        public virtual ICollection<ShoppingListItem> ShoppingListItems { get; set; }
     }
 }
+
