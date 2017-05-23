@@ -4,51 +4,51 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Shopping Lists</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add List", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.UserId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Color)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.CreatedUtc)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.ModifiedUtc)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
+        </td>*@
+        <td style="color:@item.Color">
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Color)
-        </td>
-        <td>
+        </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.CreatedUtc)
-        </td>
-        <td>
+        </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.ModifiedUtc)
-        </td>
+        </td>*@
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ShoppingListId }) |
-            @Html.ActionLink("Items on the List", "ViewItem", new { id = item.ShoppingListId })  |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ShoppingListId })*@ |
+            @Html.ActionLink("Show", "ViewItem", new { id = item.ShoppingListId })  |
             @Html.ActionLink("Delete", "Delete", new { id = item.ShoppingListId }) |
         </td>
     </tr>
