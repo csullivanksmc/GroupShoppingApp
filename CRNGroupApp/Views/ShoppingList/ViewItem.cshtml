@@ -2,7 +2,7 @@
 
 
 
-<h2>@ViewBag.Title Groceries</h2>
+<h2>Shopping List</h2>
 
 <p>
     @Html.ActionLink("Add Item", "CreateItem", new { id = ViewBag.ShoppingListId })
@@ -69,6 +69,9 @@
 }
 
 </table>
+<div>
+    @Html.ActionLink("Your Shopping Lists", "Index")
+</div>
 @section scripts {
     <script language="javascript" text="text/javascript">
         $(document)

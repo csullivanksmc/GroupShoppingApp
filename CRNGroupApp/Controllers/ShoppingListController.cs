@@ -7,7 +7,7 @@ using System;
 
 namespace CRNGroupApp.Controllers
 {
-    public class ShoppingListController : Controller
+    public class ShoppingListController : NameController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
