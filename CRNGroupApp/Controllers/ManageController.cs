@@ -12,7 +12,7 @@ namespace CRNGroupApp.Controllers
 
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : NameController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

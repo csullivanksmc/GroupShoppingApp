@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CRNGroupApp.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : NameController
     {
         public ActionResult Index()
         {
