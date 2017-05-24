@@ -197,9 +197,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NotesController.cs" />
-    <Compile Include="Controllers\ShoppingListItemsController.cs" />
-    <Compile Include="Controllers\ShoppingListsController.cs" />
+    <Compile Include="Controllers\ShoppingListController.cs" />
+    <Compile Include="Controllers\ShoppingListItemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -266,21 +265,18 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ShoppingLists\Create.cshtml" />
-    <Content Include="Views\ShoppingLists\Delete.cshtml" />
-    <Content Include="Views\ShoppingLists\Details.cshtml" />
-    <Content Include="Views\ShoppingLists\Edit.cshtml" />
-    <Content Include="Views\ShoppingLists\Index.cshtml" />
-    <Content Include="Views\Notes\Create.cshtml" />
-    <Content Include="Views\Notes\Delete.cshtml" />
-    <Content Include="Views\Notes\Details.cshtml" />
-    <Content Include="Views\Notes\Edit.cshtml" />
-    <Content Include="Views\Notes\Index.cshtml" />
-    <Content Include="Views\ShoppingListItems\Create.cshtml" />
-    <Content Include="Views\ShoppingListItems\Delete.cshtml" />
-    <Content Include="Views\ShoppingListItems\Details.cshtml" />
-    <Content Include="Views\ShoppingListItems\Edit.cshtml" />
-    <Content Include="Views\ShoppingListItems\Index.cshtml" />
+    <Content Include="Views\ShoppingList\Index.cshtml" />
+    <Content Include="Views\ShoppingList\Create.cshtml" />
+    <Content Include="Views\ShoppingList\CreateItem.cshtml" />
+    <Content Include="Views\ShoppingList\Edit.cshtml" />
+    <Content Include="Views\ShoppingList\Delete.cshtml" />
+    <Content Include="Views\ShoppingList\Details.cshtml" />
+    <Content Include="Views\ShoppingList\ViewItem.cshtml" />
+    <Content Include="Views\ShoppingListItem\Index.cshtml" />
+    <Content Include="Views\ShoppingListItem\Details.cshtml" />
+    <Content Include="Views\ShoppingListItem\Create.cshtml" />
+    <Content Include="Views\ShoppingListItem\Edit.cshtml" />
+    <Content Include="Views\ShoppingListItem\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

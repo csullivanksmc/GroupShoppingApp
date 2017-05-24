@@ -1,5 +1,5 @@
-﻿using System;
-using CRNGroupApp.Data;
+﻿using CRNGroupApp.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,22 +8,31 @@ using System.Threading.Tasks;
 
 namespace CRNGroupApp.Models
 {
-    public class ShoppingList
+   public class ShoppingList
     {
         [Key]
         public int ShoppingListId { get; set; }
 
+        public int? UserId { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        [MaxLength(25)]
         public string Name { get; set; }
 
+        [RegularExpression(@"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", ErrorMessage = "Please enter a Hex Value.")]
         public string Color { get; set; }
 
-
-        [Display(Name="Created")]
+        [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }
-        [Display(Name="Changed")]
+
         public DateTimeOffset? ModifiedUtc { get; set; }
 
-        public override string ToString() => Name;
+        public override string ToString()
+        {
+            return $"[{ShoppingListId}] {Name}";
+        }
 
+        public virtual ICollection<ShoppingListItem> ShoppingListItems { get; set; }
     }
 }

@@ -68,5 +68,15 @@
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CRNGroupApp.Data\CRNGroupApp.Data.csproj">
+      <Project>{9657565d-25ea-491d-98c8-8eb63ec8a7dd}</Project>
+      <Name>CRNGroupApp.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CRNGroupApp.Models\CRNGroupApp.Models.csproj">
+      <Project>{9d22fc9c-9fe7-4194-af79-0dc21ebaf441}</Project>
+      <Name>CRNGroupApp.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
