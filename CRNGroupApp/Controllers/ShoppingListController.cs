@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using CRNGroupApp.Data;
-
+using System;
 
 namespace CRNGroupApp.Controllers
 {
@@ -12,10 +12,25 @@ namespace CRNGroupApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ShoppingListModel
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            
+            var shopinglists = from s in db.ShoppingLists
+                           select s;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    shopinglists = shopinglists.OrderByDescending(s => s.Name);
+                    break;
+               
+                    
+                default:
+                    shopinglists = shopinglists.OrderBy(s => s.Name);
+                    break;
+            }
             //var shoppingListItems = db.ShoppingListItems.Include(s => s.ShoppingList);
-            return View(db.ShoppingLists.ToList());
+            return View(shopinglists.ToList());
         }
 
         // GET: ShoppingListModel/Details/5
