@@ -1,5 +1,4 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
@@ -77,3 +76,15 @@ textarea {
     height: auto;
     left: calc((-100vw + 33.3em) / 2);
 }
+.example5 .navbar-brand {
+    display: flex;
+    align-items: center;
+    width:100%;
+    padding-top:0;
+    margin-top:0;
+   
+}
+
+    .example5 .navbar-brand > img {
+        padding: 7px 14px;
+    }

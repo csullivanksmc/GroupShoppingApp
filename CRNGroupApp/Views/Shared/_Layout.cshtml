@@ -9,7 +9,38 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container example5" style="width:100%;">
+        <nav class="navbar navbar-default" style="width:auto; padding-top:0;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar5">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="~/Home/Index">
+                        <img style="	width: 64px;" src="~/Image/Floral-Pattern-Elephant-Silhouette-300px.png" alt="Never Forget">Never Forget Shopping List
+                    </a>
+                </div>
+                <div id="navbar5" class="navbar-collapse collapse">
+                    @Html.Partial("_LoginPartial")
+                    <ul class="nav navbar-nav ">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Your Shopping Lists", "Index", "ShoppingList")</li>
+                        }
+                    </ul>
+
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+            <!--/.container-fluid -->
+        </nav>
+
+    </div>
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -32,7 +63,7 @@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="container body-content">
         @RenderBody()
         <hr />
