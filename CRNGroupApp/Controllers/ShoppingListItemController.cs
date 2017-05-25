@@ -4,6 +4,8 @@ using System.Net;
 using System.Web.Mvc;
 using CRNGroupApp.Models;
 using CRNGroupApp.Data;
+using System;
+using PagedList;
 
 namespace CRNGroupApp.Controllers
 {
@@ -12,9 +14,43 @@ namespace CRNGroupApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ShoppingListItem
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.ShoppingListItems.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var shopinglistitems = from s in db.ShoppingListItems
+                               select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                shopinglistitems = shopinglistitems.Where(s => s.Content.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    shopinglistitems = shopinglistitems.OrderByDescending(s => s.Content);
+                    break;
+
+
+                default:
+                    shopinglistitems = shopinglistitems.OrderBy(s => s.Content);
+                    break;
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            //var shoppingListItems = db.ShoppingListItems.Include(s => s.ShoppingList);
+            return View(shopinglistitems.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: ShoppingListItem/Details/5

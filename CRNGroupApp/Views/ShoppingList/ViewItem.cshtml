@@ -2,17 +2,17 @@
 
 
 
-<h2>@ViewBag.Title Groceries</h2>
+<h2>@ViewBag.ListTitle Shopping List</h2>
 
 <p>
     @Html.ActionLink("Add Item", "CreateItem", new { id = ViewBag.ShoppingListId })
 </p>
 <table class="table">
     <tr>
-        
+
         @*<th>
-            @Html.DisplayNameFor(model => model.ShoppingList.Name)
-        </th>*@
+                @Html.DisplayNameFor(model => model.ShoppingList.Name)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.IsChecked)
         </th>
@@ -27,70 +27,74 @@
             @Html.DisplayNameFor(model => model.Note)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.CreatedUtc)
-        </th>*@
+                @Html.DisplayNameFor(model => model.CreatedUtc)
+            </th>*@
         @*<th>
-            @Html.DisplayNameFor(model => model.ModifiedUtc)
-        </th>*@
+                @Html.DisplayNameFor(model => model.ModifiedUtc)
+            </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.ShoppingList.Name)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.IsChecked)
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ShoppingList.Name)
+                </td>*@
+            <td>
+                @Html.CheckBoxFor(modelItem => item.IsChecked, new { id = item.ShoppingListItemId, @class = "itemCheckBoxes" })
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Priority)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Note)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.CreatedUtc)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.ModifiedUtc)
-        </td>*@
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.ShoppingListItemId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ShoppingListItemId }) |*@
-            @Html.ActionLink("Delete", "Delete", "ShoppingListItem", new { id=item.ShoppingListItemId },new { @class = "btn btn-default" })
-        </td>
-    </tr>
-}
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.CreatedUtc)
+                </td>*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ModifiedUtc)
+                </td>*@
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.ShoppingListItemId }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ShoppingListItemId }) |*@
+                @Html.ActionLink("Delete", "Delete", "ShoppingListItem", new { id = item.ShoppingListItemId }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
 
 </table>
+<div>
+    @Html.ActionLink("Your Shopping Lists", "Index")
+</div>
 @section scripts {
     <script language="javascript" text="text/javascript">
         $(document)
-            .ready(function() {
+            .ready(function () {
                 $("input.itemCheckBoxes") //css selector to find elements in page
                     .css({ "cursor": "pointer" })
-                    .click(function(e) {
+                    .click(function (e) {
                         var target = $(e.target);
                         var shoppingListItemId = target.attr("id");
 
                         $.ajax({
-                                method: "POST",
-                                url: "/shoppinglist/updatecheckbox",
-                                data: {
-                                    ShoppingListItemId: shoppingListItemId,
-                                    IsChecked: target.is(":checked")
-                                }
-                            })
-                            .done(function(r) {
+                            method: "POST",
+                            url: "/shoppinglist/updatecheckbox",
+                            data: {
+                                ShoppingListItemId: shoppingListItemId,
+                                IsChecked: target.is(":checked")
+                            }
+                        })
+                            .done(function (r) {
                                 console.log("finished setting IsChecked - " + r);
                             })
-                            .fail(function(r) {
+                            .fail(function (r) {
                                 alert("Failed to change status");
                             });
 

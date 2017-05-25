@@ -4,6 +4,8 @@ using System.Net;
 using System.Web.Mvc;
 using CRNGroupApp.Data;
 using System;
+using PagedList;
+using System.Xml.Linq;
 
 namespace CRNGroupApp.Controllers
 {
@@ -12,12 +14,27 @@ namespace CRNGroupApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ShoppingListModel
-        public ActionResult Index(string sortOrder)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var shopinglists = from s in db.ShoppingLists
                            select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                shopinglists = shopinglists.Where(s => s.Name.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "name_desc":
@@ -29,8 +46,11 @@ namespace CRNGroupApp.Controllers
                     shopinglists = shopinglists.OrderBy(s => s.Name);
                     break;
             }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
             //var shoppingListItems = db.ShoppingListItems.Include(s => s.ShoppingList);
-            return View(shopinglists.ToList());
+            return View(shopinglists.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: ShoppingListModel/Details/5
@@ -62,14 +82,7 @@ namespace CRNGroupApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //shoppinglistitems, reference shoppinglistitems in db with shoppinglistIDs that match that id submitted
-            //Models.ShoppingList shoppingListIndex = db.ShoppingLists.Find(id);
-            //if (shoppingListIndex == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            ////shopping lists with a specific ID as found above - display shopping list items from that list.
-            //return View(shoppingListIndex.ShoppingListItems);
+
 
             ViewBag.ShoppingListId = id;
             ViewBag.ListTitle = db.ShoppingLists.Find(id).Name;
