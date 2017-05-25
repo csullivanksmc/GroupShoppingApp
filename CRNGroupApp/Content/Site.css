@@ -71,3 +71,9 @@ textarea {
         -moz-opacity: 0.8;
         filter: alpha(opacity=8);
     }
+.elephant {
+    position: relative;
+    width: 100vw;
+    height: auto;
+    left: calc((-100vw + 33.3em) / 2);
+}

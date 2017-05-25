@@ -42,7 +42,7 @@
             @Html.DisplayFor(modelItem => item.ShoppingList.Name)
         </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.IsChecked)
+            @Html.CheckBoxFor(modelItem => item.IsChecked, new { onclick = "Delete"})
         </td>
 
         <td>
