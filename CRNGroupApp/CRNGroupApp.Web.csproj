@@ -197,6 +197,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NameController.cs" />
     <Compile Include="Controllers\ShoppingListController.cs" />
     <Compile Include="Controllers\ShoppingListItemController.cs" />
     <Compile Include="Global.asax.cs">
@@ -282,6 +283,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Name\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
