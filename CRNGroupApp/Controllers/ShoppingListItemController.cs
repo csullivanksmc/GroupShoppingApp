@@ -148,6 +148,17 @@ namespace CRNGroupApp.Controllers
             return RedirectToAction("ViewItem", "ShoppingList", new {id = shoppingListItem.ShoppingListId});
         }
 
+        // POST: ShoppingListItem/Delete/5
+        [HttpPost, ActionName("Delete Checked")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCheckedConfirmed(int id)
+        {
+            ShoppingListItem shoppingListItem = db.ShoppingListItems.Find(id);
+            db.ShoppingListItems.Remove(shoppingListItem);
+            db.SaveChanges();
+            return RedirectToAction("ViewItem", "ShoppingList", new { id = shoppingListItem.ShoppingListId });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

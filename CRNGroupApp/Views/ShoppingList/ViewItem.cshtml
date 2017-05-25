@@ -5,6 +5,7 @@
 <h2>@ViewBag.ListTitle Shopping List</h2>
 
 <p>
+
     @Html.ActionLink("Add Item", "CreateItem", new { id = ViewBag.ShoppingListId })
 </p>
 <table class="table">
@@ -65,6 +66,9 @@
                 @*@Html.ActionLink("Edit", "Edit", new { id=item.ShoppingListItemId }) |
                     @Html.ActionLink("Details", "Details", new { id=item.ShoppingListItemId }) |*@
                 @Html.ActionLink("Delete", "Delete", "ShoppingListItem", new { id = item.ShoppingListItemId }, new { @class = "btn btn-default" })
+                @*@Html.ActionLink("Delete Checked", "Delete Checked", "ShoppingListItem", new { id = item.IsChecked }, new { @class = "btn btn-default" })*@
+              
+
             </td>
         </tr>
     }
