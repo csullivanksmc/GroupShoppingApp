@@ -11,11 +11,12 @@
 <p>
     @Html.ActionLink("Add List", "Create")
 </p>
-@using (Html.BeginForm("Index", "ShoppingLists", FormMethod.Get))
+@using (Html.BeginForm("Index", "ShoppingList", FormMethod.Get))
 {
     <p>
         Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" />
+        @*<input type="submit" value="Search" />*@
+        @Html.ActionLink("Search", "Index", "Search", new { @class = "btn btn-info", @id = "addressSearch" } )
     </p>
 }
 <table class="table">

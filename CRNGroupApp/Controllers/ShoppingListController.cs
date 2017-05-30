@@ -18,23 +18,32 @@ namespace CRNGroupApp.Controllers
         // GET: ShoppingListModel
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
             var service = CreateListService();
             var model = service.GetLists();
-            
+            //var ctxdb = db.ShoppingLists
+           //             .Where(e => e.UserId == Guid.Parse(User.Identity.GetUserId()));
+
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             if (searchString != null)
             {
-                page = 1;
+                
+                var shopinglistso = from s in db.ShoppingLists
+                                    select s;
+                //model = shopinglistso.Where(s => s.Name.Contains(searchString));
+                model = model.Where(s => s.Name.Contains(searchString));
             }
             else
             {
                 searchString = currentFilter;
             }
 
-            ViewBag.CurrentFilter = searchString;
+            //CHRIS: YOU MADE THIS C LOWER CASE DONT FORGET TO REVERT IF THAT DOESNT SOVLE THE ISSUE
+            ViewBag.currentFilter = searchString;
 
             var shopinglists = from s in db.ShoppingLists
                            select s;
@@ -54,10 +63,9 @@ namespace CRNGroupApp.Controllers
                     break;
             }
             //var shoppingListItems = db.ShoppingListItems.Include(s => s.ShoppingList);
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
+            
 
-            return View(model.ToPagedList(pageNumber, pageSize));
+            return View(model.OrderBy(s => s.Name).ToPagedList(pageNumber, pageSize));
             }
 
            /* int pageSize = 3;
