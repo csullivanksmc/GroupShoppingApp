@@ -21,7 +21,7 @@ namespace CRNGroupApp.Controllers
             var service = CreateListService();
             var model = service.GetLists();
             
-           /* ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -52,16 +52,19 @@ namespace CRNGroupApp.Controllers
                 default:
                     shopinglists = shopinglists.OrderBy(s => s.Name);
                     break;
-            }*/
+            }
             //var shoppingListItems = db.ShoppingListItems.Include(s => s.ShoppingList);
-            return View(model);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            return View(model.ToPagedList(pageNumber, pageSize));
             }
 
-            int pageSize = 3;
+           /* int pageSize = 3;
             int pageNumber = (page ?? 1);
             //var shoppingListItems = db.ShoppingListItems.Include(s => s.ShoppingList);
             return View(shopinglists.ToPagedList(pageNumber, pageSize));
-        }
+        }*/
 
         // GET: ShoppingListModel/Details/5
         public ActionResult Details(int? id)
