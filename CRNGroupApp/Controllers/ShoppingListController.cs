@@ -4,6 +4,8 @@ using System.Net;
 using System.Web.Mvc;
 using CRNGroupApp.Data;
 using System;
+using CRNGroupApp.Services;
+using Microsoft.AspNet.Identity;
 
 namespace CRNGroupApp.Controllers
 {
@@ -14,7 +16,10 @@ namespace CRNGroupApp.Controllers
         // GET: ShoppingListModel
         public ActionResult Index(string sortOrder)
         {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var service = CreateListService();
+            var model = service.GetLists();
+            
+           /* ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             
             var shopinglists = from s in db.ShoppingLists
                            select s;
@@ -28,9 +33,9 @@ namespace CRNGroupApp.Controllers
                 default:
                     shopinglists = shopinglists.OrderBy(s => s.Name);
                     break;
-            }
+            }*/
             //var shoppingListItems = db.ShoppingListItems.Include(s => s.ShoppingList);
-            return View(shopinglists.ToList());
+            return View(model);
         }
 
         // GET: ShoppingListModel/Details/5
@@ -137,6 +142,8 @@ namespace CRNGroupApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                shoppingListModel.UserId = Guid.Parse(User.Identity.GetUserId());
+                shoppingListModel.CreatedUtc = DateTimeOffset.Now;
                 db.ShoppingLists.Add(shoppingListModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -212,5 +219,13 @@ namespace CRNGroupApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private ListService CreateListService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ListService(userId);
+            return service;
+        }
+
     }
 }
