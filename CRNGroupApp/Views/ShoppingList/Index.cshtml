@@ -1,7 +1,9 @@
-﻿@model IEnumerable<CRNGroupApp.Data.ShoppingList>
+﻿@model  PagedList.IPagedList<CRNGroupApp.Data.ShoppingList>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ShoppingLists";
 }
 
 <h2>Shopping Lists</h2>
@@ -9,13 +11,20 @@
 <p>
     @Html.ActionLink("Add List", "Create")
 </p>
+@using (Html.BeginForm("Index", "ShoppingLists", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <tr>
         @*<th>
             @Html.DisplayNameFor(model => model.UserId)
         </th>*@
         <th>
-           @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+           @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Color)
@@ -55,3 +64,8 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
