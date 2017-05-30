@@ -4,6 +4,8 @@ using System.Net;
 using System.Web.Mvc;
 using CRNGroupApp.Data;
 using System;
+using CRNGroupApp.Services;
+using Microsoft.AspNet.Identity;
 using PagedList;
 using System.Xml.Linq;
 
@@ -16,6 +18,11 @@ namespace CRNGroupApp.Controllers
         // GET: ShoppingListModel
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            var service = CreateListService();
+            var model = service.GetLists();
+            
+           /* ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             if (searchString != null)
@@ -45,6 +52,9 @@ namespace CRNGroupApp.Controllers
                 default:
                     shopinglists = shopinglists.OrderBy(s => s.Name);
                     break;
+            }*/
+            //var shoppingListItems = db.ShoppingListItems.Include(s => s.ShoppingList);
+            return View(model);
             }
 
             int pageSize = 3;
@@ -150,6 +160,8 @@ namespace CRNGroupApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                shoppingListModel.UserId = Guid.Parse(User.Identity.GetUserId());
+                shoppingListModel.CreatedUtc = DateTimeOffset.Now;
                 db.ShoppingLists.Add(shoppingListModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -225,5 +237,13 @@ namespace CRNGroupApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private ListService CreateListService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ListService(userId);
+            return service;
+        }
+
     }
 }
